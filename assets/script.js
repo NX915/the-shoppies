@@ -44,13 +44,22 @@ const nominateMovie = function(movieTitle) {
 
   if (nomination.children.length < 5) {
     nomination.innerHTML += `
-      <li id="${movieTitle}">
+      <li id="${movieTitle}_nom">
         ${movieTitle}
         <button class="remove_button" onclick="removeMovie('${movieTitle}')">Remove</button>
       </li>
     `;
     movie.style.display = "none";
   }
+};
+
+const removeMovie = function(movieTitle) {
+  let movieNom = document.getElementById(`${movieTitle}_nom`);
+  let movie = document.getElementById(movieTitle);
+  if (movie) {
+    movie.style.display = "";
+  }
+  movieNom.parentNode.removeChild(movieNom);
 };
 
 const checkCoolDownFinished = function(time = 1000) {
