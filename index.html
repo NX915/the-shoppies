@@ -13,12 +13,18 @@
       <a class="brand" href="./">The Shoppies</a>
   </header>
 
-  <input id="searchbar" onkeyup="searchMovie()" type="text" name="search" placeholder="Search movie title.."> 
-  <div id="result"></div>
-  <div id="pages">
-    <button onclick="changePage('previous')">Previous</button>
-    <button onclick="changePage('next')">Next</button>
+  <div class="search_box">
+    <input id="searchbar" onkeyup="searchMovie()" type="text" name="search" placeholder="Search movie title.."> 
+    <div id="result"></div>
+    <div id="pages">
+      <button onclick="changePage('previous')">Previous</button>
+      <button onclick="changePage('next')">Next</button>
+    </div>
   </div>
-
+  <footer>
+    <p>
+      Movie data courtesy of <a href="http://www.omdbapi.com">The Open Movie Database</a>.
+    </p>
+  </footer>
 </body>
 </html>
