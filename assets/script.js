@@ -30,37 +30,37 @@ const displayMovie = function(data) {
   result.innerHTML = '';
   for (const item of Search) {
     result.innerHTML += `
-    <li id="${item.Title}">
+    <li id="${item.imdbID}">
     ${item.Title}, Year: ${item.Year}
-    <button id="${item.Title}_nom_button" onclick="nominateMovie('${item.Title}')">Nominate</button>
+    <button id="${item.imdbID}_nom_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}')">Nominate</button>
     </li>
     `;
-    if (document.getElementById(`${item.Title}_nom`)) {
-      document.getElementById(`${item.Title}_nom_button`).disabled = true;
+    if (document.getElementById(`${item.imdbID}_nom`)) {
+      document.getElementById(`${item.imdbID}_nom_button`).disabled = true;
     }
   }
 };
 
-const nominateMovie = function(movieTitle) {
+const nominateMovie = function(imdbID, movieTitle) {
   let nomination = document.getElementById('nomination');
-  let movie = document.getElementById(movieTitle);
+  let movie = document.getElementById(imdbID);
 
   if (nomination.children.length < 5) {
     nomination.innerHTML += `
-      <li id="${movieTitle}_nom">
+      <li id="${imdbID}_nom">
         ${movieTitle}
-        <button class="remove_button" onclick="removeMovie('${movieTitle}')">Remove</button>
+        <button class="remove_button" onclick="removeMovie('${imdbID}')">Remove</button>
       </li>
     `;
-    document.getElementById(`${movieTitle}_nom_button`).disabled = true;
+    document.getElementById(`${imdbID}_nom_button`).disabled = true;
   }
 };
 
-const removeMovie = function(movieTitle) {
-  let movieNom = document.getElementById(`${movieTitle}_nom`);
-  let movie = document.getElementById(movieTitle);
+const removeMovie = function(imdbID) {
+  let movieNom = document.getElementById(`${imdbID}_nom`);
+  let movie = document.getElementById(imdbID);
   if (movie) {
-    document.getElementById(`${movieTitle}_nom_button`).disabled = false;
+    document.getElementById(`${imdbID}_nom_button`).disabled = false;
   }
   movieNom.parentNode.removeChild(movieNom);
 };
