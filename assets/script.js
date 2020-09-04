@@ -27,10 +27,10 @@ const displayMovie = function(data) {
       movieID = generateRandomString();
     }
     result.innerHTML += `
-      <div id="${movieID}">
+      <li id="${movieID}">
         ${item.Title}, Year: ${item.Year}
         <button id="${movieID}_nom" class="nom_button">Nominate</button>
-      </div>
+      </li>
     `;
   }
 };
