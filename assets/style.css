@@ -35,8 +35,8 @@ header{
 
 .search_box{
   /* background-color: rgb(6, 72, 60); */
-  margin: 1em;
-  min-height: calc(100vh - 8em);
+  /* margin: 1em; */
+  min-height: calc(100vh - 6em);
   border-color: black;
   padding: 1em;
 }
@@ -54,21 +54,31 @@ header{
 
 footer{
   width: 100%;
-  height: 4em;
+  height: 6em;
   background-color: rgb(6, 72, 60);
   display: flex;
-  align-items: stretch;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   white-space: nowrap;
   color:rgb(251, 247, 237);
   /* padding: 10px; */
 }
 
 #credit{
-  text-align: center;
+  /* text-align: center; */
+  font-size: larger;
   color:rgb(251, 247, 237);
+  margin: 10px;
+  margin-top: 25px;
 }
 
+#data_credit{
+  /* text-align: center; */
+  font-size: smaller;
+  color: rgb(251, 247, 237);
+  margin: 2px;
+}
 /* input[type=text] { 
    width: 30%; 
    -webkit-transition: width 0.15s ease-in-out; 
