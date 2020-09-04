@@ -1,14 +1,19 @@
 const key = '65288b09';
 const apiURL = `http://www.omdbapi.com/?apikey=${key}&`;
+let searchTerm;
+let page = 1;
 
 const searchMovie = function() {
   let input = document.getElementById('searchbar');
   let result = document.getElementById('result');
   const { value } = input;
+  searchTerm = value;
+  // page = 1;
 
   if (value.length > 3 && value[value.length - 1] === ' ') {
     console.log(value);
-    fetch(`${apiURL}s=${value}`)
+    result.innerHTML = '';
+    fetch(`${apiURL}s=${value.trim()}&page=${page}`)
       .then(response => response.json().then((data) => {
         console.log(data);
         const { Search } = data;
@@ -17,6 +22,17 @@ const searchMovie = function() {
         }
       }));
   }
+};
+
+const changePage = function(direction) {
+  switch (direction) {
+  case 'next':
+    page++;
+    break;
+  case 'previous':
+    page--;
+  }
+  searchMovie();
 };
 
 // {

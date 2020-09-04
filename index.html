@@ -7,12 +7,19 @@
   <link rel="stylesheet" type="text/css" href="./assets/style.css"> 
   <script src="./assets/script.js"></script> 
 </head>
+
 <body>
-  <header>The Shoppies</header>
+  <header>
+      <a class="brand" href="./">The Shoppies</a>
+  </header>
 
   <input id="searchbar" onkeyup="searchMovie()" type="text"
   name="search" placeholder="Search movie title.."> 
-  <div id = "result"></div>
+  <div id="result"></div>
+  <div id="pages">
+    <button onclick="changePage('previous')">Previous</button>
+    <button onclick="changePage('next')">Next</button>
+  </div>
 
 </body>
 </html>
