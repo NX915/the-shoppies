@@ -5,14 +5,33 @@ let searchTerm = '';
 let page;
 let pageMax;
 
+const generateRandomString = function(length = 6) {
+  const charString = 'abcdefghijklmnopqretuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+  let randomString = '';
+  for (let i = 0; i < length; i++) {
+    randomString += charString[Math.floor(Math.random() * charString.length)];
+  }
+  return randomString;
+};
+
 const displayMovie = function(data) {
   let result = document.getElementById('result');
   const { Search } = data;
   pageMax = Math.ceil(data.totalResults / 10);
+  
   console.log(data, pageMax);
   result.innerHTML = '';
   for (const item of Search) {
-    result.innerHTML += `${item.Title}, Year: ${item.Year}<br>`;
+    let movieID = generateRandomString();
+    while (document.getElementById(movieID)) {
+      movieID = generateRandomString();
+    }
+    result.innerHTML += `
+      <div id="${movieID}">
+        ${item.Title}, Year: ${item.Year}
+        <button id="${movieID}_nom" class="nom_button">Nominate</button>
+      </div>
+    `;
   }
 };
 
@@ -32,18 +51,16 @@ const checkCoolDownFinished = function(time = 1000) {
 
 const searchMovie = function() {
   let input = document.getElementById('searchbar');
-  const coolDown = 300;
+  const coolDown = 500;
   const { value } = input;
   lastInputTime = Date.now();
+  searchTerm = value.trim();
+
   setTimeout(() => {
-    if (searchTerm !== value.trim()) {
-      searchTerm = value.trim();
-      page = 1;
-  
-      if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
-        console.log(value);
-        fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
-      }
+    page = 1;
+    if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
+      console.log(value);
+      fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
     }
   }, coolDown);
 };

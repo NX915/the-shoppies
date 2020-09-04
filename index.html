@@ -10,17 +10,30 @@
 
 <body>
   <header>
+    <nav>
       <a class="brand" href="./">The Shoppies</a>
+    </nav>
   </header>
 
-  <div class="search_box">
-    <input id="searchbar" onkeyup="searchMovie()" type="text" name="search" placeholder="Search movie title.."> 
-    <div id="result"></div>
-    <div id="pages">
-      <button onclick="changePage('previous')">Previous</button>
-      <button onclick="changePage('next')">Next</button>
+  <main>
+    <div class="search_box">
+      <input id="searchbar" onkeyup="searchMovie()" type="text" name="search" placeholder="Search movie title.."> 
     </div>
-  </div>
+    <div class ="content_box">
+      <div class="result_box">
+        <h2>Search result</h2>
+        <div id="result"></div>
+        <div id="pages">
+          <button onclick="changePage('previous')">Previous</button>
+          <button onclick="changePage('next')">Next</button>
+        </div>
+      </div>
+      <div class="nom_box">
+        <h2>Nominations</h2>
+      </div>
+    </div>
+  </main>
+
   <footer>
     <p id="credit">Made by <a href="https://github.com/NX915" target="_blank">Sean</a></p>
     <p id="data_credit">Movie data courtesy of <a href="http://www.omdbapi.com" target="_blank">The Open Movie Database</a>.</p>
