@@ -14,6 +14,13 @@ const generateRandomString = function(length = 6) {
   return randomString;
 };
 
+const fetchFromApi = function(url, cb) {
+  fetch(url)
+    .then(response => response.json().then((data) => {
+      cb(data);
+    }));
+};
+
 const displayMovie = function(data) {
   let result = document.getElementById('result');
   const { Search } = data;
@@ -27,19 +34,22 @@ const displayMovie = function(data) {
       movieID = generateRandomString();
     }
     result.innerHTML += `
-      <li id="${movieID}">
+      <li id="${item.Title}">
         ${item.Title}, Year: ${item.Year}
-        <button id="${movieID}_nom" class="nom_button">Nominate</button>
+        <button class="nom_button" onclick="nominateMovie('${item.Title}')">Nominate</button>
       </li>
     `;
   }
 };
 
-const fetchFromApi = function(url, cb) {
-  fetch(url)
-    .then(response => response.json().then((data) => {
-      cb(data);
-    }));
+const nominateMovie = function(movieTitle) {
+  let nomination = document.getElementById('nomination');
+  let movie = document.getElementById(movieTitle);
+  nomination.innerHTML += `
+    <li id="${movieTitle}">${movieTitle}</li>
+  `;
+  movie.parentNode.removeChild(movie);
+
 };
 
 const checkCoolDownFinished = function(time = 1000) {
