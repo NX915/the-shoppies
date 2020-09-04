@@ -29,10 +29,6 @@ const displayMovie = function(data) {
   console.log(data, pageMax);
   result.innerHTML = '';
   for (const item of Search) {
-    let movieID = generateRandomString();
-    while (document.getElementById(movieID)) {
-      movieID = generateRandomString();
-    }
     result.innerHTML += `
       <li id="${item.Title}">
         ${item.Title}, Year: ${item.Year}
@@ -45,11 +41,16 @@ const displayMovie = function(data) {
 const nominateMovie = function(movieTitle) {
   let nomination = document.getElementById('nomination');
   let movie = document.getElementById(movieTitle);
-  nomination.innerHTML += `
-    <li id="${movieTitle}">${movieTitle}</li>
-  `;
-  movie.parentNode.removeChild(movie);
 
+  if (nomination.children.length < 5) {
+    nomination.innerHTML += `
+      <li id="${movieTitle}">
+        ${movieTitle}
+        <button class="remove_button" onclick="removeMovie('${movieTitle}')">Remove</button>
+      </li>
+    `;
+    movie.style.display = "none";
+  }
 };
 
 const checkCoolDownFinished = function(time = 1000) {
