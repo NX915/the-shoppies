@@ -33,7 +33,8 @@ const displayMovie = function(data) {
     <li id="${item.imdbID}">
     <h3 class="movie_title">${item.Title}</h3>
     <h4 class="movie_year">Year: ${item.Year}</h4>
-    <button id="${item.imdbID}_nom_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}')">Nominate</button>
+    <img class="movie_poster" src="${item.Poster}" alt="Poster for ${item.Title}">
+    <button id="${item.imdbID}_nom_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${item.Poster}')">Nominate</button>
     </li>
     `;
     if (document.getElementById(`${item.imdbID}_nom`)) {
@@ -42,7 +43,7 @@ const displayMovie = function(data) {
   }
 };
 
-const nominateMovie = function(imdbID, movieTitle, movieYear) {
+const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
   let nomination = document.getElementById('nomination');
   let movie = document.getElementById(imdbID);
 
@@ -51,6 +52,7 @@ const nominateMovie = function(imdbID, movieTitle, movieYear) {
       <li id="${imdbID}_nom">
         <h3 class="movie_title">${movieTitle} (${movieYear})</h3>
         <button class="remove_button" onclick="removeMovie('${imdbID}')">Remove</button>
+        <img class="movie_poster" src=${moviePoster} alt="Poster for ${movieTitle}">
       </li>
     `;
     document.getElementById(`${imdbID}_nom_button`).disabled = true;

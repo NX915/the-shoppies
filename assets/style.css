@@ -22,6 +22,10 @@ a:visited{
   font-weight: normal;
 }
 
+.movie_poster {
+  max-width: 150px;
+}
+
 header{
   width: 100%;
   height: 4em;
