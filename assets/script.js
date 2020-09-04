@@ -1,38 +1,70 @@
 const key = '65288b09';
 const apiURL = `http://www.omdbapi.com/?apikey=${key}&`;
-let searchTerm;
-let page = 1;
+let lastInputTime = 0;
+let searchTerm = '';
+let page;
+let pageMax;
+
+const displayMovie = function(data) {
+  let result = document.getElementById('result');
+  const { Search } = data;
+  pageMax = Math.ceil(data.totalResults / 10);
+  console.log(data, pageMax);
+  result.innerHTML = '';
+  for (const item of Search) {
+    result.innerHTML += `${item.Title}, Year: ${item.Year}<br>`;
+  }
+};
+
+const fetchFromApi = function(url, cb) {
+  fetch(url)
+    .then(response => response.json().then((data) => {
+      cb(data);
+    }));
+};
+
+const checkCoolDownFinished = function(time = 1000) {
+  if (Date.now() - lastInputTime + 10 < time) {
+    return false;
+  }
+  return true;
+};
 
 const searchMovie = function() {
   let input = document.getElementById('searchbar');
-  let result = document.getElementById('result');
+  const coolDown = 300;
   const { value } = input;
-  searchTerm = value;
-  // page = 1;
-
-  if (value.length > 3 && value[value.length - 1] === ' ') {
-    console.log(value);
-    result.innerHTML = '';
-    fetch(`${apiURL}s=${value.trim()}&page=${page}`)
-      .then(response => response.json().then((data) => {
-        console.log(data);
-        const { Search } = data;
-        for (const item of Search) {
-          result.innerHTML += `${item.Title}, Year: ${item.Year}<br>`;
-        }
-      }));
-  }
+  lastInputTime = Date.now();
+  setTimeout(() => {
+    if (searchTerm !== value.trim()) {
+      searchTerm = value.trim();
+      page = 1;
+  
+      if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
+        console.log(value);
+        fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
+      }
+    }
+  }, coolDown);
 };
 
 const changePage = function(direction) {
   switch (direction) {
   case 'next':
-    page++;
+    if (page < pageMax) {
+      page++;
+    } else {
+      return;
+    }
     break;
   case 'previous':
-    page--;
+    if (page > 1) {
+      page--;
+    } else {
+      return;
+    }
   }
-  searchMovie();
+  fetchFromApi(`${apiURL}s=${document.getElementById('searchbar').value.trim()}&page=${page}`, displayMovie);
 };
 
 // {
