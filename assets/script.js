@@ -1,5 +1,5 @@
 const key = '65288b09';
-const apiURL = `http://www.omdbapi.com/?apikey=${key}&`;
+const apiURL = `http://www.omdbapi.com/?apikey=${key}&type=movie&`;
 let lastInputTime = 0;
 let searchTerm = '';
 let page;
@@ -31,8 +31,9 @@ const displayMovie = function(data) {
   for (const item of Search) {
     result.innerHTML += `
     <li id="${item.imdbID}">
-    ${item.Title}, Year: ${item.Year}
-    <button id="${item.imdbID}_nom_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}')">Nominate</button>
+    <h3 class="movie_title">${item.Title}</h3>
+    <h4 class="movie_year">Year: ${item.Year}</h4>
+    <button id="${item.imdbID}_nom_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}')">Nominate</button>
     </li>
     `;
     if (document.getElementById(`${item.imdbID}_nom`)) {
@@ -41,14 +42,14 @@ const displayMovie = function(data) {
   }
 };
 
-const nominateMovie = function(imdbID, movieTitle) {
+const nominateMovie = function(imdbID, movieTitle, movieYear) {
   let nomination = document.getElementById('nomination');
   let movie = document.getElementById(imdbID);
 
   if (nomination.children.length < 5) {
     nomination.innerHTML += `
       <li id="${imdbID}_nom">
-        ${movieTitle}
+        <h3 class="movie_title">${movieTitle} (${movieYear})</h3>
         <button class="remove_button" onclick="removeMovie('${imdbID}')">Remove</button>
       </li>
     `;
@@ -83,6 +84,7 @@ const searchMovie = function() {
     page = 1;
     if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
       console.log(value);
+      document.getElementById('search_info').innerHTML = `Search result for '${searchTerm}'`;
       fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
     }
   }, coolDown);

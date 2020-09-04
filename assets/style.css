@@ -12,6 +12,16 @@ a:visited{
   color: inherit;
 }
 
+.movie_title {
+  margin-bottom: 0em;
+}
+
+.movie_year {
+  margin-top: 0em;
+  margin-bottom: 0.5em;
+  font-weight: normal;
+}
+
 header{
   width: 100%;
   height: 4em;
@@ -43,10 +53,10 @@ main{
 }
 
 .search_box{
+  /* background-color: indigo; */
   margin: auto;
   padding: 1em;
   max-width: 900px;
-  background-color: indigo;
   display: flex;
   justify-content: stretch;
 }
@@ -63,6 +73,7 @@ main{
 }
 
 .content_box{
+  /* background-color: pink; */
   /* background-color: rgb(6, 72, 60); */
   margin: auto;
   display: flex;
@@ -71,16 +82,15 @@ main{
   max-width: 900px;
   border-color: black;
   padding: 1em;
-  background-color: pink;
 }
 
 .result_box{
-  background-color: goldenrod;
+  /* background-color: goldenrod; */
   flex: 1 1 auto;
 }
 
 .nom_box{
-  background-color: greenyellow;
+  /* background-color: greenyellow; */
   flex: 1 1 auto;
 }
 
