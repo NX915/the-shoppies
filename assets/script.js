@@ -30,11 +30,14 @@ const displayMovie = function(data) {
   result.innerHTML = '';
   for (const item of Search) {
     result.innerHTML += `
-      <li id="${item.Title}">
-        ${item.Title}, Year: ${item.Year}
-        <button class="nom_button" onclick="nominateMovie('${item.Title}')">Nominate</button>
-      </li>
+    <li id="${item.Title}">
+    ${item.Title}, Year: ${item.Year}
+    <button class="nom_button" onclick="nominateMovie('${item.Title}')">Nominate</button>
+    </li>
     `;
+    if (document.getElementById(`${item.Title}_nom`)) {
+      document.getElementById(item.Title).style.display = 'none';
+    }
   }
 };
 
@@ -49,7 +52,7 @@ const nominateMovie = function(movieTitle) {
         <button class="remove_button" onclick="removeMovie('${movieTitle}')">Remove</button>
       </li>
     `;
-    movie.style.display = "none";
+    movie.style.display = 'none';
   }
 };
 
@@ -57,7 +60,7 @@ const removeMovie = function(movieTitle) {
   let movieNom = document.getElementById(`${movieTitle}_nom`);
   let movie = document.getElementById(movieTitle);
   if (movie) {
-    movie.style.display = "";
+    movie.style.display = '';
   }
   movieNom.parentNode.removeChild(movieNom);
 };
