@@ -1,7 +1,7 @@
 const key = '65288b09';
 const apiURL = `http://www.omdbapi.com/?apikey=${key}&type=movie&`;
 const posterPlaceholderURL = 'https://imgur.com/mzbtmQz.png';
-const nominationCount = 2;
+const nominationCount = 4;
 let lastInputTime = 0;
 let searchTerm = '';
 let page;
@@ -44,11 +44,13 @@ const displayMovie = function(data) {
     let poster = item.Poster === 'N/A' ? posterPlaceholderURL : item.Poster;
 
     result.innerHTML += `
-    <li id="${item.imdbID}">
-    <h3 class="movie_title">${item.Title}</h3>
-    <h4 class="movie_year">Year: ${item.Year}</h4>
-    <img class="movie_poster" src="${poster}" alt="Poster for ${item.Title}">
-    <button id="${item.imdbID}_nom_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">Nominate</button>
+    <li id="${item.imdbID}" class="result_item movie_item">
+      <img class="result_item movie_poster" src="${poster}" alt="Poster for ${item.Title}">
+      <div class="result_item movie_info">
+        <h3 class="result_item movie_title">${item.Title}</h3>
+        <h4 class="result_item movie_year">Year: ${item.Year}</h4>
+        <button id="${item.imdbID}_nom_button" class="result_item nom_buttom" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">Nominate</button>
+      </div>
     </li>
     `;
     if (document.getElementById(`${item.imdbID}_nom`)) {
@@ -63,10 +65,12 @@ const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
 
   if (nomination.children.length < 5) {
     nomination.innerHTML += `
-      <li id="${imdbID}_nom">
-        <h3 class="movie_title">${movieTitle} (${movieYear})</h3>
-        <button class="remove_button" onclick="removeMovie('${imdbID}')">Remove</button>
-        <img class="movie_poster" src=${moviePoster} alt="Poster for ${movieTitle}">
+      <li id="${imdbID}_nom" class="nom_item movie_item">
+        <img class="nom_item movie_poster" src=${moviePoster} alt="Poster for ${movieTitle}">
+        <div class="nom_item movie_info">
+          <h3 class="nom_item movie_title">${movieTitle} (${movieYear})</h3>
+          <button class="nom_item remove_button" onclick="removeMovie('${imdbID}')">Remove</button>
+        </div>  
       </li>
     `;
     changeAllChildren(document.getElementById('nom_box'), (element) => {
