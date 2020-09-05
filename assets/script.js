@@ -21,6 +21,15 @@ const fetchFromApi = function(url, cb) {
     }));
 };
 
+const changeAllChildren = function(element, cb) {
+  const children = element.children;
+
+  cb(element);
+  for (const subElement of children) {
+    changeAllChildren(subElement, cb);
+  }
+};
+
 const displayMovie = function(data) {
   let result = document.getElementById('result');
   const { Search } = data;
@@ -57,15 +66,30 @@ const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
     `;
     document.getElementById(`${imdbID}_nom_button`).disabled = true;
   }
+  if (nomination.children.length === 3) {
+    changeAllChildren(document.getElementById('result_box'), (element) => {
+      element.classList.add('hide');
+    });
+    document.getElementById('result_box').style.flex = '0 0 0px';
+    document.getElementById('nom_box').style.flex = '1 1 auto';
+  }
 };
 
 const removeMovie = function(imdbID) {
+  let nomination = document.getElementById('nomination');
   let movieNom = document.getElementById(`${imdbID}_nom`);
   let movie = document.getElementById(imdbID);
   if (movie) {
     document.getElementById(`${imdbID}_nom_button`).disabled = false;
   }
   movieNom.parentNode.removeChild(movieNom);
+  if (nomination.children.length < 3) {
+    changeAllChildren(document.getElementById('result_box'), (element) => {
+      element.classList.remove('hide');
+    });
+    document.getElementById('result_box').style.flex = '';
+    document.getElementById('nom_box').style.flex = '';
+  }
 };
 
 const checkCoolDownFinished = function(time = 1000) {
