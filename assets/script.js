@@ -1,7 +1,7 @@
 const key = '65288b09';
 const apiURL = `http://www.omdbapi.com/?apikey=${key}&type=movie&`;
 const posterPlaceholderURL = 'https://imgur.com/mzbtmQz.png';
-const nominationCount = 5;
+const nominationCount = 2;
 let lastInputTime = 0;
 let searchTerm = '';
 let page;
@@ -69,9 +69,19 @@ const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
         <img class="movie_poster" src=${moviePoster} alt="Poster for ${movieTitle}">
       </li>
     `;
+    changeAllChildren(document.getElementById('nom_box'), (element) => {
+      element.classList.remove('hide');
+    });
     document.getElementById(`${imdbID}_nom_button`).disabled = true;
   }
+
+  //hide search if nomination reach limit
   if (nomination.children.length === nominationCount) {
+    document.getElementById('search_box').classList.add('invis');
+    document.getElementById('searchbar').classList.add('hide');
+    document.getElementById('search_button').classList.add('hide');
+
+
     changeAllChildren(document.getElementById('result_box'), (element) => {
       element.classList.add('hide');
     });
@@ -84,16 +94,28 @@ const removeMovie = function(imdbID) {
   let nomination = document.getElementById('nomination');
   let movieNom = document.getElementById(`${imdbID}_nom`);
   let movie = document.getElementById(imdbID);
+
   if (movie) {
     document.getElementById(`${imdbID}_nom_button`).disabled = false;
   }
+
   movieNom.parentNode.removeChild(movieNom);
+
   if (nomination.children.length < nominationCount) {
     changeAllChildren(document.getElementById('result_box'), (element) => {
       element.classList.remove('hide');
     });
+    document.getElementById('search_box').classList.remove('invis');
+    document.getElementById('searchbar').classList.remove('hide');
+    document.getElementById('search_button').classList.remove('hide');
     document.getElementById('result_box').style.flex = '';
     document.getElementById('nom_box').style.flex = '';
+  }
+
+  if (nomination.children.length === 0) {
+    changeAllChildren(document.getElementById('nom_box'), (element) => {
+      element.classList.add('hide');
+    });
   }
 };
 
@@ -102,6 +124,28 @@ const checkCoolDownFinished = function(time = 1000) {
     return false;
   }
   return true;
+};
+
+const searchBarResize = function() {
+  let input = document.getElementById('searchbar');
+
+  if (input.value.trim().length > 1) {
+    input.classList.remove('minSearchBar');
+    input.classList.add('maxSearchBar');
+    changeAllChildren(document.getElementById('result_box'), (element) => {
+      element.classList.remove('hide');
+    });
+    changeAllChildren(document.getElementById('search_box'), (element) => {
+      element.classList.remove('fullSearchBox');
+    });
+    document.getElementById('content_box').classList.remove('hide');
+  } else {
+    input.classList.remove('maxSearchBar');
+    input.classList.add('minSearchBar');
+    changeAllChildren(document.getElementById('result_box'), (element) => {
+      element.classList.add('hide');
+    });
+  }
 };
 
 const searchMovie = function() {

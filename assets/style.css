@@ -59,34 +59,79 @@ nav{
   padding: 1em;
   max-width: 900px;
   display: flex;
-  justify-content: stretch;
+  justify-content: start;
+  align-items: center;
+  -webkit-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out; 
+}
+
+.fullSearchBox.search_box{
+  min-height: calc(100vh - 4em);
+}
+
+.fullSearchBox.search{
+  max-height: 40vh;
+  font-size: 6vh;
+  border-width: 1vh;
+}
+
+.fullSearchBox.search_icon{
+  flex: 0 1 25vh;
 }
 
 .search{
   padding: 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
+}
+
+.minSearchBar{
+  flex: 0 1 auto;
+  -webkit-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out; 
+}
+
+.maxSearchBar{
+  flex: 1 1 100%;
+  -webkit-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out; 
 }
 
 #searchbar{ 
   /* margin: 10px;  */
-  border-style: solid;
+  border-style: none;
+  border-bottom-style: solid;
+  border-color: rgb(14, 110, 84);
+  /* flex: 0 0 auto; */
+  /* border-style: solid; */
 }
 
 #searchbar:focus{ 
-  outline-color: rgb(6, 72, 60);
+  outline-style: none;
+  outline-color: rgb(14, 110, 84);
+  /* flex: 1 1 100%; */
 }
 
 .search_icon{
   padding: 0px;
   margin-right: 0.5em;
-  width: 2em;
+  flex: 0 0 2em;
+  opacity: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-style: none;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.search_icon:focus{
+  outline-style: none;
 }
 
 .search_icon:hover{
-  filter: brightness(1.25) drop-shadow(0 0 1px rgb(14, 110, 84));
+  opacity: 0.9;
+  border-style: none;
+  outline-style: none;
 }
 
 .content_box{
@@ -95,10 +140,14 @@ nav{
   margin: auto;
   display: flex;
   justify-content: space-around;
-  min-height: calc(100vh - 6em);
+  min-height: calc(100vh - 4em);
   max-width: 900px;
   border-color: black;
   padding: 1em;
+}
+
+.auto_flex{
+  flex: 1 1 auto;
 }
 
 #result_box{
@@ -151,24 +200,11 @@ footer{
   margin: 0px;
   position: relative;
   left: -100vw;
-  /* display: none; */
-}
-/* input[type=text] { 
-   width: 30%; 
-   -webkit-transition: width 0.15s ease-in-out; 
-   transition: width 0.15s ease-in-out; 
-}  */
-
-/* When the input field gets focus, change its width to 100% */
-/* input[type=text]:focus { 
-  width: 70%; 
-}  */
-/* 
-#list{
- font-size:  1.5em;
- margin-left: 90px;
+  flex: 0 0 0px;
+  min-width: 0px;
+  min-height: 0px;
 }
 
-.result{
-display: list-item;
-}   */
+.invis {
+  opacity: 0;
+}
