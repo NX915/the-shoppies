@@ -66,7 +66,7 @@ const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
     `;
     document.getElementById(`${imdbID}_nom_button`).disabled = true;
   }
-  if (nomination.children.length === 3) {
+  if (nomination.children.length === 5) {
     changeAllChildren(document.getElementById('result_box'), (element) => {
       element.classList.add('hide');
     });
@@ -83,7 +83,7 @@ const removeMovie = function(imdbID) {
     document.getElementById(`${imdbID}_nom_button`).disabled = false;
   }
   movieNom.parentNode.removeChild(movieNom);
-  if (nomination.children.length < 3) {
+  if (nomination.children.length < 5) {
     changeAllChildren(document.getElementById('result_box'), (element) => {
       element.classList.remove('hide');
     });
