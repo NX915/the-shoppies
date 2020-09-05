@@ -1,5 +1,7 @@
 const key = '65288b09';
 const apiURL = `http://www.omdbapi.com/?apikey=${key}&type=movie&`;
+const posterPlaceholderURL = 'https://imgur.com/mzbtmQz.png';
+const nominationCount = 5;
 let lastInputTime = 0;
 let searchTerm = '';
 let page;
@@ -34,16 +36,19 @@ const displayMovie = function(data) {
   let result = document.getElementById('result');
   const { Search } = data;
   pageMax = Math.ceil(data.totalResults / 10);
+
   
   console.log(data, pageMax);
   result.innerHTML = '';
   for (const item of Search) {
+    let poster = item.Poster === 'N/A' ? posterPlaceholderURL : item.Poster;
+
     result.innerHTML += `
     <li id="${item.imdbID}">
     <h3 class="movie_title">${item.Title}</h3>
     <h4 class="movie_year">Year: ${item.Year}</h4>
-    <img class="movie_poster" src="${item.Poster}" alt="Poster for ${item.Title}">
-    <button id="${item.imdbID}_nom_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${item.Poster}')">Nominate</button>
+    <img class="movie_poster" src="${poster}" alt="Poster for ${item.Title}">
+    <button id="${item.imdbID}_nom_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">Nominate</button>
     </li>
     `;
     if (document.getElementById(`${item.imdbID}_nom`)) {
@@ -66,7 +71,7 @@ const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
     `;
     document.getElementById(`${imdbID}_nom_button`).disabled = true;
   }
-  if (nomination.children.length === 5) {
+  if (nomination.children.length === nominationCount) {
     changeAllChildren(document.getElementById('result_box'), (element) => {
       element.classList.add('hide');
     });
@@ -83,7 +88,7 @@ const removeMovie = function(imdbID) {
     document.getElementById(`${imdbID}_nom_button`).disabled = false;
   }
   movieNom.parentNode.removeChild(movieNom);
-  if (nomination.children.length < 5) {
+  if (nomination.children.length < nominationCount) {
     changeAllChildren(document.getElementById('result_box'), (element) => {
       element.classList.remove('hide');
     });

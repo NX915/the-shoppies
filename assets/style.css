@@ -24,6 +24,7 @@ a:visited{
 
 .movie_poster {
   max-width: 150px;
+  max-height: 222px;
 }
 
 header{
@@ -134,6 +135,7 @@ footer{
   width: 0px;
   height: 0px;
   opacity: 0;
+  display: none;
 }
 /* input[type=text] { 
    width: 30%; 
