@@ -92,15 +92,15 @@ main{
 #result_box{
   /* background-color: goldenrod; */
   flex: 1 1 50%;
-  -webkit-transition: all 0.15s ease-in-out; 
-  transition: all 0.15s ease-in-out; 
+  -webkit-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out; 
 }
 
 #nom_box{
   /* background-color: greenyellow; */
   flex: 1 1 50%;
-  -webkit-transition: all 0.15s ease-in-out; 
-  transition: all 0.15s ease-in-out; 
+  -webkit-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out; 
 }
 
 footer{
@@ -135,7 +135,9 @@ footer{
   width: 0px;
   height: 0px;
   opacity: 0;
-  display: none;
+  position: relative;
+  left: -100vw;
+  /* display: none; */
 }
 /* input[type=text] { 
    width: 30%; 
