@@ -17,8 +17,11 @@
 
   <main>
     <div class="search_box">
-      <label name="search">Search</label>
-      <input id="searchbar" onkeyup="searchMovie()" type="text" name="search" placeholder="movie title."> 
+      <div class="search search_icon" onclick="searchMovie()">
+        <svg viewBox="0 0 512 512"><path fill="rgb(14, 110, 84)" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg>
+      </div>
+      <label class="search hide" name="search">Search</label>
+      <input id="searchbar" class="search" onkeyup="searchMovie()" type="text" name="search" placeholder="movie title.">
     </div>
     <div class ="content_box">
       <div id="result_box">
@@ -37,8 +40,9 @@
   </main>
 
   <footer>
-    <p id="credit">Made by <a href="https://github.com/NX915" target="_blank">Sean</a></p>
-    <p id="data_credit">Movie data courtesy of <a href="http://www.omdbapi.com" target="_blank">The Open Movie Database</a>.</p>
+    <p class="credit">Made by <a href="https://github.com/NX915" target="_blank">Sean</a></p>
+    <p class="other_credit">Movie data courtesy of <a href="http://www.omdbapi.com" target="_blank">The Open Movie Database</a>.</p>
+    <p class="other_credit">Search icon courtesy of <a href="http://www.https://fontawesome.com/" target="_blank">Font Awesome</a>.</p>
   </footer>
 </body>
 </html>
