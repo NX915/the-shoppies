@@ -104,6 +104,20 @@ nav{
   /* flex: 1 1 100%; */
 }
 
+.svg_button{
+  border-style: none;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.svg_button:focus{
+  outline-style: none;
+}
+
+.svg_button:disabled{
+  opacity: 0.7;
+}
+
 .search_icon{
   padding: 0px;
   margin-right: 0.5em;
@@ -111,19 +125,14 @@ nav{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-style: none;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-.search_icon:focus{
-  outline-style: none;
 }
 
 .search_icon:hover{
-  filter: drop-shadow(1px 1px 1px rgb(14, 110, 84));
-  border-style: none;
-  outline-style: none;
+  filter: drop-shadow(1px 1px 1px rgb(14, 110, 84)) brightness(1.1);
+}
+
+.nom_icon:hover{
+  filter: drop-shadow(0px 0px 1px rgb(14, 110, 84)) brightness(1.1);
 }
 
 .content_box{
@@ -141,7 +150,7 @@ nav{
 
 .movie_grid{
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: start;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -236,7 +245,6 @@ footer{
 @media (max-width: 700px) {  
   .movie_item{
     flex-direction: column;
-    margin-bottom: 0.5em;
   }
 
   .movie_poster {

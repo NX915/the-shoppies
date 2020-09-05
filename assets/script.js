@@ -49,7 +49,10 @@ const displayMovie = function(data) {
       <div class="result_item movie_info">
         <h3 class="result_item movie_title">${item.Title}</h3>
         <h4 class="result_item movie_year">Year: ${item.Year}</h4>
-        <button id="${item.imdbID}_nom_button" class="result_item nom_buttom" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">Nominate</button>
+        <button id="${item.imdbID}_nom_button" class="result_item nom_buttom svg_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">
+          <svg class="nom_icon" viewBox="0 0 512 512"><path fill="rgb(14, 110, 84)" d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z"></path></svg>
+          Nominate
+        </button>
       </div>
     </li>
     `;
@@ -57,6 +60,11 @@ const displayMovie = function(data) {
       document.getElementById(`${item.imdbID}_nom_button`).disabled = true;
     }
   }
+
+  if (data.totalResults) {
+    document.getElementById('search_info').innerHTML = `${data.totalResults} movies found for "${searchTerm}"`;
+  }
+
 };
 
 const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
@@ -81,6 +89,12 @@ const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
 
   //hide search if nomination reach limit
   if (nomination.children.length === nominationCount) {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'auto'
+    });
+
     document.getElementById('search_box').classList.add('invis');
     document.getElementById('searchbar').classList.add('hide');
     document.getElementById('search_button').classList.add('hide');
@@ -163,7 +177,7 @@ const searchMovie = function() {
     page = 1;
     if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
       console.log(value);
-      document.getElementById('search_info').innerHTML = `Search result for '${searchTerm}'`;
+      // document.getElementById('search_info').innerHTML = `Search result for '${searchTerm}'`;
       fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
     }
   }, coolDown);
@@ -186,6 +200,11 @@ const changePage = function(direction) {
     }
   }
   fetchFromApi(`${apiURL}s=${document.getElementById('searchbar').value.trim()}&page=${page}`, displayMovie);
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'auto'
+  });
 };
 
 // {
