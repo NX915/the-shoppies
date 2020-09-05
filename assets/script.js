@@ -1,6 +1,8 @@
 const key = '65288b09';
 const apiURL = `http://www.omdbapi.com/?apikey=${key}&type=movie&`;
 const posterPlaceholderURL = 'https://imgur.com/mzbtmQz.png';
+const nomIcon = '<svg class="nom_icon" viewBox="0 0 512 512"><path fill="rgb(14, 110, 84)" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"></path></svg>';
+const removeIcon = '<svg class="remove_icon" viewBox="0 0 512 512"><path fill="rgb(143, 18, 24)" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path></svg>';
 const nominationCount = 4;
 let lastInputTime = 0;
 let searchTerm = '';
@@ -49,8 +51,8 @@ const displayMovie = function(data) {
       <div class="result_item movie_info">
         <h3 class="result_item movie_title">${item.Title}</h3>
         <h4 class="result_item movie_year">Year: ${item.Year}</h4>
-        <button id="${item.imdbID}_nom_button" class="result_item nom_buttom svg_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">
-          <svg class="nom_icon" viewBox="0 0 512 512"><path fill="rgb(14, 110, 84)" d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z"></path></svg>
+        <button id="${item.imdbID}_nom_button" class="result_item nom_button svg_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">
+          ${nomIcon}
           Nominate
         </button>
       </div>
@@ -77,7 +79,10 @@ const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
         <img class="nom_item movie_poster" src=${moviePoster} alt="Poster for ${movieTitle}">
         <div class="nom_item movie_info">
           <h3 class="nom_item movie_title">${movieTitle} (${movieYear})</h3>
-          <button class="nom_item remove_button" onclick="removeMovie('${imdbID}')">Remove</button>
+          <button class="nom_item remove_button svg_button" onclick="removeMovie('${imdbID}')">
+            ${removeIcon}
+            Remove
+          </button>
         </div>  
       </li>
     `;
