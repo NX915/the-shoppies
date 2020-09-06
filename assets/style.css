@@ -90,6 +90,10 @@ ul {
   transition: all 0.3s ease-in-out; 
 }
 
+.error_msg {
+  font-size: 10vw;
+}
+
 #searchbar { 
   border-style: none;
   border-bottom-style: solid;

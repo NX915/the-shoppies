@@ -79,38 +79,43 @@ const displayMovie = function(data) {
   const { Search } = data;
   pageMax = Math.ceil(data.totalResults / 10);
 
-  
   console.log(data, pageMax);
   result.innerHTML = '';
-  for (const item of Search) {
-    let poster = item.Poster === 'N/A' ? posterPlaceholderURL : item.Poster;
+  document.getElementById('search_info').innerHTML = '';
+  document.getElementById('pages').innerHTML = '';
 
-    result.innerHTML += `
-    <li id="${item.imdbID}" class="result_item movie_item">
-      <img class="result_item movie_poster" src="${poster}" alt="Poster for ${item.Title}">
-      <div class="result_item movie_info">
-        <h3 class="result_item movie_title">${item.Title}</h3>
-        <h4 class="result_item movie_year">Year: ${item.Year}</h4>
-        <button id="${item.imdbID}_nom_button" class="result_item nom_button svg_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">
-          <div class="svg_icon">
-            ${nomIcon}
-          </div>  
-          Nominate
-        </button>
-      </div>
-    </li>
-    `;
-    if (document.getElementById(`${item.imdbID}_nom`)) {
-      document.getElementById(`${item.imdbID}_nom_button`).disabled = true;
+  if (data.Response === "False") {
+    result.innerHTML = `<b class="error_msg">Sorry! ${data.Error}<b>`;
+  } else {
+    for (const item of Search) {
+      let poster = item.Poster === 'N/A' ? posterPlaceholderURL : item.Poster;
+  
+      result.innerHTML += `
+      <li id="${item.imdbID}" class="result_item movie_item">
+        <img class="result_item movie_poster" src="${poster}" alt="Poster for ${item.Title}">
+        <div class="result_item movie_info">
+          <h3 class="result_item movie_title">${item.Title}</h3>
+          <h4 class="result_item movie_year">Year: ${item.Year}</h4>
+          <button id="${item.imdbID}_nom_button" class="result_item nom_button svg_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">
+            <div class="svg_icon">
+              ${nomIcon}
+            </div>  
+            Nominate
+          </button>
+        </div>
+      </li>
+      `;
+      if (document.getElementById(`${item.imdbID}_nom`)) {
+        document.getElementById(`${item.imdbID}_nom_button`).disabled = true;
+      }
+    }
+  
+    displayPage(page, pageMax);
+   
+    if (data.totalResults) {
+      document.getElementById('search_info').innerHTML = `<b>${data.totalResults}</b> movies found for <b>"${searchTerm}"</b>`;
     }
   }
-
-  displayPage(page, pageMax);
- 
-  if (data.totalResults) {
-    document.getElementById('search_info').innerHTML = `<b>${data.totalResults}</b> movies found for <b>"${searchTerm}"</b>`;
-  }
-
 };
 
 const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
@@ -184,6 +189,7 @@ const removeMovie = function(imdbID) {
       element.classList.add('hide');
     });
   }
+  searchBarResize();
 };
 
 const checkCoolDownFinished = function(time = 1000) {
@@ -207,6 +213,12 @@ const searchBarResize = function() {
     });
     document.getElementById('content_box').classList.remove('hide');
   } else {
+    if (document.getElementById('nomination').children.length === 0) {
+      changeAllChildren(document.getElementById('search_box'), (element) => {
+        element.classList.add('fullSearchBox');
+      });
+      document.getElementById('content_box').classList.add('hide');
+    }
     input.classList.remove('maxSearchBar');
     input.classList.add('minSearchBar');
     changeAllChildren(document.getElementById('result_box'), (element) => {
