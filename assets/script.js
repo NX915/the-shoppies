@@ -12,15 +12,6 @@ let page;
 let pageMax;
 let apiCache;
 
-const generateRandomString = function(length = 6) {
-  const charString = 'abcdefghijklmnopqretuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-  let randomString = '';
-  for (let i = 0; i < length; i++) {
-    randomString += charString[Math.floor(Math.random() * charString.length)];
-  }
-  return randomString;
-};
-
 const fetchFromApi = function(url, cb) {
   fetch(url)
     .then(response => response.json().then((data) => {
