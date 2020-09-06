@@ -11,17 +11,6 @@ let searchTerm = '';
 let page;
 let pageMax;
 
-const test = function() {
-  const Http = new XMLHttpRequest();
-  const url = 'https://jsonplaceholder.typicode.com/posts';
-  Http.open("GET", url);
-  Http.send();
-
-  Http.onreadystatechange = (e) => {
-    console.log(Http.responseText);
-  };
-};
-
 const generateRandomString = function(length = 6) {
   const charString = 'abcdefghijklmnopqretuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
   let randomString = '';
