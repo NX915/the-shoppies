@@ -242,12 +242,8 @@ const searchBarResize = function() {
   }
 };
 
-const changeFocus = function(event) {
-  const key = event.keyCode;
-
-  if (key === 13) {
-    document.getElementById('search_button').focus();
-  }
+const changeFocus = function() {
+  document.getElementById('search_button').focus();
 };
 
 const searchMovie = function(event) {
@@ -262,16 +258,20 @@ const searchMovie = function(event) {
     left: 0,
     behavior: 'smooth'
   });
-
-  changeFocus(event);
+  
+  if (event.keyCode === 13) {
+    changeFocus();
+  }
 
   setTimeout(() => {
     page = 1;
     if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
       console.log(value);
+      changeFocus();
       fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
     } else if (searchTerm.length === 1) {
       document.getElementById('result').innerHTML = `<b class="error_msg">Sorry! Search term too short!<b>`;
+      changeFocus();
     }
   }, coolDown);
 };
