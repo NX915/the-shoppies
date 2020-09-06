@@ -1,5 +1,5 @@
 const key = '65288b09';
-const apiURL = `http://www.omdbapi.com/?apikey=${key}&type=movie&`;
+const apiURL = `https://www.omdbapi.com/?apikey=${key}&type=movie&`;
 const posterPlaceholderURL = 'https://imgur.com/mzbtmQz.png';
 const nomIcon = '<svg class="nom_icon" viewBox="0 0 512 512"><path fill="rgb(14, 110, 84)" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"></path></svg>';
 const removeIcon = '<svg class="remove_icon" viewBox="0 0 512 512"><path fill="rgb(143, 18, 24)" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path></svg>';
@@ -10,6 +10,17 @@ let lastInputTime = 0;
 let searchTerm = '';
 let page;
 let pageMax;
+
+const test = function() {
+  const Http = new XMLHttpRequest();
+  const url = 'https://jsonplaceholder.typicode.com/posts';
+  Http.open("GET", url);
+  Http.send();
+
+  Http.onreadystatechange = (e) => {
+    console.log(Http.responseText);
+  };
+};
 
 const generateRandomString = function(length = 6) {
   const charString = 'abcdefghijklmnopqretuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -84,6 +95,8 @@ const displayMovie = function(data) {
   let result = document.getElementById('result');
   const { Search } = data;
   pageMax = Math.ceil(data.totalResults / 10);
+
+  test();
 
   window.scroll({
     top: 0,
