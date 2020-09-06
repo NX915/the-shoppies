@@ -226,7 +226,6 @@ const searchMovie = function() {
     page = 1;
     if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
       console.log(value);
-      // document.getElementById('search_info').innerHTML = `Search result for '${searchTerm}'`;
       fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
     }
   }, coolDown);
@@ -255,28 +254,3 @@ const changePage = function(direction) {
     behavior: 'auto'
   });
 };
-
-// {
-//   "Title":"Sports Monster",
-//   "Year":"1990–1991",
-//   "Rated":"N/A",
-//   "Released":"N/A",
-//   "Runtime":"N/A",
-//   "Genre":"Comedy",
-//   "Director":"N/A",
-//   "Writer":"N/A",
-//   "Actors":"Nick Bakay, Joe Bolster, Jon Hayman, Steve Skrovan",
-//   "Plot":"N/A",
-//   "Language":"English",
-//   "Country":"USA",
-//   "Awards":"N/A",
-//   "Poster":"N/A",
-//   "Ratings":[{"Source":"Internet Movie Database","Value":"7.0/10"}],
-//   "Metascore":"N/A",
-//   "imdbRating":"7.0",
-//   "imdbVotes":"8",
-//   "imdbID":"tt0395902",
-//   "Type":"series",
-//   "totalSeasons":"N/A",
-//   "Response":"True"
-// }
