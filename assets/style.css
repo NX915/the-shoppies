@@ -123,6 +123,10 @@ ul {
   font-weight: bold;
 }
 
+.svg_button.page_button {
+  width: 5em;
+}
+
 .svg_button:focus {
   outline-style: none;
   filter: hue-rotate(240deg);
@@ -140,6 +144,10 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.svg_icon:hover {
+  filter: drop-shadow(0px 0px 1px rgb(14, 110, 84)) opacity(0.8);
 }
 
 .search_icon:hover {
@@ -220,6 +228,15 @@ ul {
   flex: 1 1 50%;
   -webkit-transition: all 0.3s ease-in-out; 
   transition: all 0.3s ease-in-out; 
+}
+
+#pages {
+  display: flex;
+  justify-content: space-between;
+}
+
+#pages.edge_page {
+  justify-content: center;
 }
 
 footer {

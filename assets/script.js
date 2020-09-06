@@ -3,7 +3,9 @@ const apiURL = `http://www.omdbapi.com/?apikey=${key}&type=movie&`;
 const posterPlaceholderURL = 'https://imgur.com/mzbtmQz.png';
 const nomIcon = '<svg class="nom_icon" viewBox="0 0 512 512"><path fill="rgb(14, 110, 84)" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"></path></svg>';
 const removeIcon = '<svg class="remove_icon" viewBox="0 0 512 512"><path fill="rgb(143, 18, 24)" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path></svg>';
-const nominationCount = 4;
+const previousIcon = '<svg class="previous_icon" viewBox="0 0 512 512"><path fill="rgb(14, 110, 84)" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"></path></svg>';
+const nextIcon = '<svg class="next_icon" viewBox="0 0 512 512"><path fill="rgb(14, 110, 84)" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"></path></svg>';
+const nominationCount = 5;
 let lastInputTime = 0;
 let searchTerm = '';
 let page;
@@ -34,6 +36,44 @@ const changeAllChildren = function(element, cb) {
   }
 };
 
+const displayPage = function(page, pageMax) {
+  let txt = '';
+  const pages = document.getElementById('pages');
+  if (pageMax > 1) {
+    if (page > 1) {
+      txt += `
+        <button class="svg_button page_button" onclick="changePage('previous')">
+          <div class="svg_icon">
+            ${previousIcon}
+          </div>
+          <div>
+            Previous
+          </div>
+        </button>
+      `;
+    }
+    if (page < pageMax) {
+      txt += `
+        <button class="svg_button page_button" onclick="changePage('next')">
+          <div class="svg_icon">
+            ${nextIcon}
+          </div>
+          <div>
+            Next
+          </div>
+        </button>
+      `;
+    }
+    pages.innerHTML = txt;
+
+    if (page === 1 || page === pageMax) {
+      pages.classList.add('edge_page');
+    } else {
+      pages.classList.remove('edge_page');
+    }
+  }
+};
+
 const displayMovie = function(data) {
   let result = document.getElementById('result');
   const { Search } = data;
@@ -52,7 +92,9 @@ const displayMovie = function(data) {
         <h3 class="result_item movie_title">${item.Title}</h3>
         <h4 class="result_item movie_year">Year: ${item.Year}</h4>
         <button id="${item.imdbID}_nom_button" class="result_item nom_button svg_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">
-          ${nomIcon}
+          <div class="svg_icon">
+            ${nomIcon}
+          </div>  
           Nominate
         </button>
       </div>
@@ -63,6 +105,8 @@ const displayMovie = function(data) {
     }
   }
 
+  displayPage(page, pageMax);
+ 
   if (data.totalResults) {
     document.getElementById('search_info').innerHTML = `<b>${data.totalResults}</b> movies found for <b>"${searchTerm}"</b>`;
   }
