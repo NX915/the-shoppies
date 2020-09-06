@@ -212,6 +212,16 @@ ul {
   max-height: 222px;
 }
 
+.result_item.movie_poster {
+  width: 150px;
+  height: 222px;
+}
+
+.nom_item.movie_poster {
+  width: 150px;
+  height: 222px;
+}
+
 #search_info {
   font-weight: normal;
 }
@@ -323,6 +333,11 @@ footer {
     max-height: 111px;
   }
 
+  .result_item.movie_poster {
+    width: 75px;
+    height: 111px;
+  }
+
   .movie_title {
     margin-top: 0.5em;
     text-align: center;
@@ -334,6 +349,11 @@ footer {
 
   .nom_item.movie_title {
     margin-bottom: 0.1em;
+  }
+
+  .nom_item.movie_poster {
+    width: 75px;
+    height: 111px;
   }
 
   .result_item.movie_info {
