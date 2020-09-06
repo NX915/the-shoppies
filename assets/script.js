@@ -165,8 +165,10 @@ const nominateMovie = function(imdbID) {
       left: 0,
       behavior: 'auto'
     });
+    document.getElementById('nom_box').classList.add('finish');
+    document.getElementById('nom_info').innerHTML = 'Here\'s your Nomination List!';
 
-    document.getElementById('search_box').classList.add('invis');
+    document.getElementById('search_box').classList.add('hide');
     document.getElementById('searchbar').classList.add('hide');
     document.getElementById('search_button').classList.add('hide');
 
@@ -191,10 +193,13 @@ const removeMovie = function(imdbID) {
   movieNom.parentNode.removeChild(movieNom);
 
   if (nomination.children.length < nominationCount) {
+    document.getElementById('nom_box').classList.remove('finish');
+    document.getElementById('nom_info').innerHTML = 'Your Nominations';
     changeAllChildren(document.getElementById('result_box'), (element) => {
       element.classList.remove('hide');
     });
-    document.getElementById('search_box').classList.remove('invis');
+
+    document.getElementById('search_box').classList.remove('hide');
     document.getElementById('searchbar').classList.remove('hide');
     document.getElementById('search_button').classList.remove('hide');
     document.getElementById('result_box').style.flex = '';
