@@ -65,7 +65,7 @@ ul {
 
 .fullSearchBox.search {
   max-height: 40vh;
-  font-size: 250%;
+  font-size: 200%;
   border-width: 1vh;
 }
 
@@ -296,6 +296,17 @@ footer {
   font-size: smaller;
   color: rgb(251, 247, 237);
   margin: 2px;
+}
+
+@media (min-width: 700px) {
+
+  .fullSearchBox.search {
+    font-size: 3.25em;
+  }
+
+  .error_msg {
+    font-size: 4.5em;
+  }
 }
 
 @media (max-width: 700px) {
