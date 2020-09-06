@@ -208,9 +208,10 @@ const checkCoolDownFinished = function(time = 1000) {
 };
 
 const searchBarResize = function() {
+  const coolDown = 550;
   let input = document.getElementById('searchbar');
 
-  if (input.value.trim().length > 1) {
+  if (input.value.trim().length >= 1) {
     input.classList.remove('minSearchBar');
     input.classList.add('maxSearchBar');
     changeAllChildren(document.getElementById('result_box'), (element) => {
@@ -222,10 +223,14 @@ const searchBarResize = function() {
     document.getElementById('content_box').classList.remove('hide');
   } else {
     if (document.getElementById('nomination').children.length === 0) {
-      changeAllChildren(document.getElementById('search_box'), (element) => {
-        element.classList.add('fullSearchBox');
-      });
-      document.getElementById('content_box').classList.add('hide');
+      setTimeout(() => {
+        if (checkCoolDownFinished(coolDown) && searchTerm.length === 0) {
+          changeAllChildren(document.getElementById('search_box'), (element) => {
+            element.classList.add('fullSearchBox');
+          });
+          document.getElementById('content_box').classList.add('hide');
+        }
+      }, coolDown);
     }
     input.classList.remove('maxSearchBar');
     input.classList.add('minSearchBar');
@@ -247,6 +252,8 @@ const searchMovie = function() {
     if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
       console.log(value);
       fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
+    } else if (searchTerm.length <= 1) {
+      document.getElementById('result').innerHTML = `<b class="error_msg">Sorry! Search term too short!<b>`;
     }
   }, coolDown);
 };
