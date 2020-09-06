@@ -244,6 +244,7 @@ const searchBarResize = function() {
 
 const changeFocus = function() {
   document.getElementById('search_button').focus();
+  document.activeElement.blur();
 };
 
 const searchMovie = function(event) {
