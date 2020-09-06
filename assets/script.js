@@ -10,6 +10,7 @@ let lastInputTime = 0;
 let searchTerm = '';
 let page;
 let pageMax;
+let apiCache;
 
 const generateRandomString = function(length = 6) {
   const charString = 'abcdefghijklmnopqretuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -23,6 +24,7 @@ const generateRandomString = function(length = 6) {
 const fetchFromApi = function(url, cb) {
   fetch(url)
     .then(response => response.json().then((data) => {
+      apiCache = data;
       cb(data);
     }));
 };
@@ -91,7 +93,6 @@ const displayMovie = function(data) {
     behavior: 'auto'
   });
 
-  console.log(data, pageMax);
   clearSearchArea();
 
   if (data.Response === "False") {
@@ -108,7 +109,7 @@ const displayMovie = function(data) {
         <div class="result_item movie_info">
           <h3 class="result_item movie_title">${item.Title}</h3>
           <h4 class="result_item movie_year">Year: ${item.Year}</h4>
-          <button id="${item.imdbID}_nom_button" class="result_item nom_button svg_button" onclick="nominateMovie('${item.imdbID}', '${item.Title}', '${item.Year}', '${poster}')">
+          <button id="${item.imdbID}_nom_button" class="result_item nom_button svg_button" onclick="nominateMovie('${item.imdbID}')">
             <div class="svg_icon">
               ${nomIcon}
             </div>  
@@ -130,17 +131,29 @@ const displayMovie = function(data) {
   }
 };
 
-const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
-  let nomination = document.getElementById('nomination');
+const indexOfMovieById = function(id, arr) {
+  let index = -1;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].imdbID === id) {
+      return i;
+    }
+  }
+  return index;
+};
 
+const nominateMovie = function(imdbID) {
+  let nomination = document.getElementById('nomination');
+  const { Title, Year, Poster } = apiCache.Search[indexOfMovieById(imdbID, apiCache.Search)];
+  
   if (nomination.children.length < 5) {
+    let poster = Poster === 'N/A' ? posterPlaceholderURL : Poster;
     nomination.innerHTML += `
       <li id="${imdbID}_nom" class="nom_item movie_item">
         <div class="nom_item movie_poster">
-          <img class="movie_poster" src=${moviePoster} alt="Poster for ${movieTitle}">
+          <img class="movie_poster" src=${poster} alt="Poster for ${Title}">
         </div>
         <div class="nom_item movie_info">
-          <h3 class="nom_item movie_title">${movieTitle} (${movieYear})</h3>
+          <h3 class="nom_item movie_title">${Title} (${Year})</h3>
           <button class="nom_item remove_button svg_button" onclick="removeMovie('${imdbID}')">
             ${removeIcon}
             Remove
