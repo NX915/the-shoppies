@@ -57,11 +57,12 @@ ul {
 
 .fullSearchBox.search_box {
   min-height: calc(100vh - 6em);
+  width: 100%;
 }
 
 .fullSearchBox.search {
   max-height: 40vh;
-  font-size: 5vw;
+  font-size: 300%;
   border-width: 1vh;
 }
 
@@ -235,7 +236,7 @@ ul {
 }
 
 footer {
-  width: 100vw;
+  width: 100%;
   height: auto;
   padding-top: 0.5em;
   padding-bottom: 1em;
