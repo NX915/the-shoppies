@@ -85,6 +85,12 @@ const displayMovie = function(data) {
   const { Search } = data;
   pageMax = Math.ceil(data.totalResults / 10);
 
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'auto'
+  });
+
   console.log(data, pageMax);
   clearSearchArea();
 
