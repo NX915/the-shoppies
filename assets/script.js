@@ -74,15 +74,24 @@ const displayPage = function(page, pageMax) {
   }
 };
 
+const clearSearchBox = function() {
+  document.getElementById('result').innerHTML = '';
+  document.getElementById('search_info').innerHTML = '';
+  document.getElementById('pages').innerHTML = '';
+};
+
 const displayMovie = function(data) {
   let result = document.getElementById('result');
   const { Search } = data;
   pageMax = Math.ceil(data.totalResults / 10);
 
   console.log(data, pageMax);
-  result.innerHTML = '';
-  document.getElementById('search_info').innerHTML = '';
-  document.getElementById('pages').innerHTML = '';
+  clearSearchBox();
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'auto'
+  });
 
   if (data.Response === "False") {
     result.innerHTML = `<b class="error_msg">Sorry! ${data.Error}<b>`;
@@ -120,7 +129,6 @@ const displayMovie = function(data) {
 
 const nominateMovie = function(imdbID, movieTitle, movieYear, moviePoster) {
   let nomination = document.getElementById('nomination');
-  let movie = document.getElementById(imdbID);
 
   if (nomination.children.length < 5) {
     nomination.innerHTML += `
@@ -260,9 +268,4 @@ const changePage = function(direction) {
     }
   }
   fetchFromApi(`${apiURL}s=${document.getElementById('searchbar').value.trim()}&page=${page}`, displayMovie);
-  window.scroll({
-    top: 0,
-    left: 0,
-    behavior: 'auto'
-  });
 };
