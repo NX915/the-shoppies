@@ -88,7 +88,7 @@ ul {
 }
 
 .fullSearchBox.search_box {
-  min-height: calc(100vh - 6em);
+  min-height: calc(100vh - 13em);
 }
 
 .fullSearchBox.search {
@@ -207,7 +207,7 @@ ul {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  min-height: calc(100vh - 4em);
+  min-height: calc(100vh - 13em);
   max-width: 900px;
   border-color: black;
   padding: 1em;
