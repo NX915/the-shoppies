@@ -96,6 +96,7 @@ ul {
   /* margin: 10px;  */
   border-style: none;
   border-bottom-style: solid;
+  border-bottom-width: 0.2em;
   border-color: rgb(14, 110, 84);
   /* flex: 0 0 auto; */
   /* border-style: solid; */
@@ -103,7 +104,6 @@ ul {
 
 #searchbar:focus { 
   outline-style: none;
-  outline-color: rgb(14, 110, 84);
   filter: hue-rotate(180deg);
   /* flex: 1 1 100%; */
 }
@@ -125,6 +125,7 @@ ul {
 
 .svg_button:focus {
   outline-style: none;
+  filter: hue-rotate(240deg);
 }
 
 .svg_button:disabled {
@@ -147,7 +148,6 @@ ul {
 
 .nom_icon:hover {
   filter: drop-shadow(0px 0px 1px rgb(14, 110, 84)) opacity(0.8);
-  font-weight: 2000;
 }
 
 .remove_icon:hover {
