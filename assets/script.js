@@ -242,7 +242,15 @@ const searchBarResize = function() {
   }
 };
 
-const searchMovie = function() {
+const changeFocus = function(event) {
+  const key = event.keyCode;
+
+  if (key === 13) {
+    document.getElementById('search_button').focus();
+  }
+};
+
+const searchMovie = function(event) {
   let input = document.getElementById('searchbar');
   const coolDown = 500;
   const { value } = input;
@@ -254,6 +262,8 @@ const searchMovie = function() {
     left: 0,
     behavior: 'smooth'
   });
+
+  changeFocus(event);
 
   setTimeout(() => {
     page = 1;

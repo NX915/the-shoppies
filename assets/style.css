@@ -28,6 +28,10 @@ nav {
   margin:auto;
 }
 
+form.search {
+  display: flex;
+}
+
 ul {
   margin: 0px;
   padding-inline-start: 0px;
