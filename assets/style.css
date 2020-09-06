@@ -104,6 +104,7 @@ ul {
 #searchbar:focus { 
   outline-style: none;
   outline-color: rgb(14, 110, 84);
+  filter: hue-rotate(180deg);
   /* flex: 1 1 100%; */
 }
 
@@ -141,7 +142,7 @@ ul {
 }
 
 .search_icon:hover {
-  filter: drop-shadow(1px 1px 1px rgb(14, 110, 84)) brightness(1.1);
+  filter: hue-rotate(180deg);
 }
 
 .nom_icon:hover {
@@ -201,6 +202,10 @@ ul {
 .movie_poster {
   max-width: 150px;
   max-height: 222px;
+}
+
+#search_info {
+  font-weight: normal;
 }
 
 #result_box {
@@ -265,6 +270,25 @@ footer {
 }
 
 @media (max-width: 700px) {
+
+  .fullSearchBox.search {
+    max-height: 40vh;
+    font-size: 6vh;
+    border-width: 1vh;
+  }
+  
+  .fullSearchBox.search_icon {
+    flex: 0 1 25vh;
+  }
+
+  #search_info {
+    font-size: 1em;
+  }
+
+  #nom_info {
+    font-size: 1.5em;
+  }
+
   .movie_grid {
     align-items: center;
   }
@@ -280,7 +304,16 @@ footer {
   }
 
   .movie_title {
+    margin-top: 0.5em;
     text-align: center;
+  }
+  
+  #nom_info {
+    text-align: center;
+  }
+
+  .nom_item.movie_title {
+    margin-bottom: 0.1em;
   }
 
   .nom_item.remove_button {

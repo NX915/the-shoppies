@@ -64,7 +64,7 @@ const displayMovie = function(data) {
   }
 
   if (data.totalResults) {
-    document.getElementById('search_info').innerHTML = `${data.totalResults} movies found for "${searchTerm}"`;
+    document.getElementById('search_info').innerHTML = `<b>${data.totalResults}</b> movies found for <b>"${searchTerm}"</b>`;
   }
 
 };
