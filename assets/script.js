@@ -74,7 +74,7 @@ const displayPage = function(page, pageMax) {
   }
 };
 
-const clearSearchBox = function() {
+const clearSearchArea = function() {
   document.getElementById('result').innerHTML = '';
   document.getElementById('search_info').innerHTML = '';
   document.getElementById('pages').innerHTML = '';
@@ -86,7 +86,7 @@ const displayMovie = function(data) {
   pageMax = Math.ceil(data.totalResults / 10);
 
   console.log(data, pageMax);
-  clearSearchBox();
+  clearSearchArea();
   window.scroll({
     top: 0,
     left: 0,
@@ -237,6 +237,7 @@ const searchBarResize = function() {
     changeAllChildren(document.getElementById('result_box'), (element) => {
       element.classList.add('hide');
     });
+    clearSearchArea();
   }
 };
 
@@ -252,7 +253,7 @@ const searchMovie = function() {
     if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
       console.log(value);
       fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
-    } else if (searchTerm.length <= 1) {
+    } else if (searchTerm.length === 1) {
       document.getElementById('result').innerHTML = `<b class="error_msg">Sorry! Search term too short!<b>`;
     }
   }, coolDown);
