@@ -66,7 +66,7 @@ ul {
 }
 
 .fullSearchBox.search_icon {
-  flex: 1 1 25vh;
+  flex: 0 0 20%;
 }
 
 .fullSearchBox.search_icon:hover {
