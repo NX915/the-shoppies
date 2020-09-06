@@ -46,7 +46,7 @@ ul {
 
 .brand.box {
   height: 100%;
-  padding-left: 10%;
+  padding-left: 5%;
   display: flex;
   align-items: flex-end;
 }
@@ -343,7 +343,7 @@ footer {
   }
 
   .brand.box {
-    padding-left: 5%;
+    padding-left: 2%;
   }
 
   .search_box{

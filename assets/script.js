@@ -95,7 +95,7 @@ const displayMovie = function(data) {
       result.innerHTML += `
       <li id="${item.imdbID}" class="result_item movie_item">
         <div class="result_item movie_poster">
-          <img class="movie_poster" src="${poster}" alt="Poster for ${item.Title}">
+          <img class="movie_poster" src="${poster}" onerror=${posterPlaceholderURL} alt="Poster for ${item.Title}">
         </div>
         <div class="result_item movie_info">
           <h3 class="result_item movie_title">${item.Title}</h3>
@@ -141,7 +141,7 @@ const nominateMovie = function(imdbID) {
     nomination.innerHTML += `
       <li id="${imdbID}_nom" class="nom_item movie_item">
         <div class="nom_item movie_poster">
-          <img class="movie_poster" src=${poster} alt="Poster for ${Title}">
+          <img class="movie_poster" src=${poster} onerror=${posterPlaceholderURL} alt="Poster for ${Title}">
         </div>
         <div class="nom_item movie_info">
           <h3 class="nom_item movie_title">${Title} (${Year})</h3>
