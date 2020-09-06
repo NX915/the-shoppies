@@ -61,12 +61,12 @@ ul {
 
 .fullSearchBox.search {
   max-height: 40vh;
-  font-size: 6vh;
+  font-size: 6vw;
   border-width: 1vh;
 }
 
 .fullSearchBox.search_icon {
-  flex: 0 1 25vh;
+  flex: 1 1 25vh;
 }
 
 .fullSearchBox.search_icon:hover {
