@@ -293,6 +293,10 @@ footer {
     flex: 0 0 2em;
   }
 
+  .content_box {
+    padding: 0.5em;
+  }
+
   #search_info {
     font-size: 1em;
   }
@@ -352,8 +356,25 @@ footer {
     font-size: 6vw;
   }
 
+  .search {
+    font-size: 1em;
+    padding: 3px;
+  }
+
   .search_icon {
     margin-right: 0.2em;
     flex: 0 0 1.5em;
+  }
+
+  .content_box {
+    padding: 0.1em;
+  }
+
+  .movie_title {
+    font-size: 1em;
+  }
+
+  .movie_year {
+    font-size: 0.8em;
   }
 }
