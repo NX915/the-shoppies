@@ -99,6 +99,7 @@ ul {
   border-bottom-style: solid;
   border-bottom-width: 0.2em;
   border-color: rgb(14, 110, 84);
+  border-radius: 0px;
 }
 
 #searchbar:focus { 
@@ -119,7 +120,7 @@ ul {
   background-color: transparent;
   text-decoration: none;
   font-weight: bold;
-  width: 6em;
+  width: 6.5em;
 }
 
 .svg_button.page_button {
