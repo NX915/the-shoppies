@@ -267,12 +267,9 @@ const searchMovie = function(event) {
   setTimeout(() => {
     page = 1;
     if (checkCoolDownFinished(coolDown) && searchTerm.length > 1) {
-      console.log(value);
-      changeFocus();
       fetchFromApi(`${apiURL}s=${searchTerm}&page=${page}`, displayMovie);
     } else if (searchTerm.length === 1) {
       document.getElementById('result').innerHTML = `<b class="error_msg">Sorry! Search term too short!<b>`;
-      changeFocus();
     }
   }, coolDown);
 };
