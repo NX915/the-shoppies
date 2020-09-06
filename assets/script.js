@@ -87,11 +87,6 @@ const displayMovie = function(data) {
 
   console.log(data, pageMax);
   clearSearchArea();
-  window.scroll({
-    top: 0,
-    left: 0,
-    behavior: 'auto'
-  });
 
   if (data.Response === "False") {
     result.innerHTML = `<b class="error_msg">Sorry! ${data.Error}<b>`;
@@ -247,6 +242,12 @@ const searchMovie = function() {
   const { value } = input;
   lastInputTime = Date.now();
   searchTerm = value.trim();
+
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  });
 
   setTimeout(() => {
     page = 1;
