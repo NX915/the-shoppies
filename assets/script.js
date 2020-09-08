@@ -224,9 +224,11 @@ const checkCoolDownFinished = function(time = 1000) {
 };
 
 const clearSearchInput = function() {
-  document.getElementById('searchbar').value = '';
+  const searchBar = document.getElementById('searchbar');
+  searchBar.value = '';
   searchTerm = '';
   searchBarResize();
+  searchBar.focus();
 };
 
 //change search bar size depending on what is in the search bar
