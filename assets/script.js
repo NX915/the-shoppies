@@ -223,9 +223,14 @@ const checkCoolDownFinished = function(time = 1000) {
   return true;
 };
 
+const clearSearchInput = function() {
+  document.getElementById('searchbar').value = '';
+  searchTerm = '';
+  searchBarResize();
+};
+
 //change search bar size depending on what is in the search bar
 const searchBarResize = function() {
-  const coolDown = 550;
   let input = document.getElementById('searchbar');
 
   if (input.value.trim().length >= 1) {
@@ -238,22 +243,20 @@ const searchBarResize = function() {
       element.classList.remove('fullSearchBox');
     });
     document.getElementById('content_box').classList.remove('hide');
+    document.getElementById('clear_button').classList.remove('hide');
   } else {
-    if (document.getElementById('nomination').children.length === 0) {
-      setTimeout(() => {
-        if (checkCoolDownFinished(coolDown) && searchTerm.length === 0) {
-          changeAllChildren(document.getElementById('search_box'), (element) => {
-            element.classList.add('fullSearchBox');
-          });
-          document.getElementById('content_box').classList.add('hide');
-        }
-      }, coolDown);
-    }
     input.classList.remove('maxSearchBar');
     input.classList.add('minSearchBar');
+    document.getElementById('clear_button').classList.add('hide');
     changeAllChildren(document.getElementById('result_box'), (element) => {
       element.classList.add('hide');
     });
+    if (document.getElementById('nomination').children.length === 0 && searchTerm.length === 0) {
+      changeAllChildren(document.getElementById('search_box'), (element) => {
+        element.classList.add('fullSearchBox');
+      });
+      document.getElementById('content_box').classList.add('hide');
+    }
     clearSearchArea();
   }
 };

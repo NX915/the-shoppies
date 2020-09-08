@@ -139,6 +139,17 @@ ul {
   filter: hue-rotate(180deg);
 }
 
+#clear_button {
+  font-size: 6px;
+  padding-top: 15px;
+  opacity: 0.5;
+}
+
+#clear_button:hover {
+  opacity: 0.8;
+}
+
+
 #nom_info {
   margin-block-start: 0%;
   margin-block-end: 0%;
@@ -335,6 +346,10 @@ footer {
     font-size: 6vw;
   }
 
+  .fullSearchBox.search_box {
+    min-height: calc(100vh - 12em);
+  }
+
   .brand.box {
     padding-left: 2%;
   }
@@ -451,7 +466,7 @@ footer {
   opacity: 0;
   padding: 0px;
   margin: 0px;
-  position: relative;
+  position: absolute;
   left: -100vw;
   top: -100vh;
   flex: 0 0 0px;
