@@ -161,7 +161,7 @@ ul {
   border-style: none;
   background-color: transparent;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 1000;
   width: 6.5em;
 }
 
@@ -186,20 +186,13 @@ ul {
   justify-content: center;
 }
 
-.svg_icon:hover {
-  filter: drop-shadow(0px 0px 1px rgb(14, 110, 84)) opacity(0.8);
+.svg_button:hover {
+  filter: hue-rotate(60deg) brightness(1.1);
+  font-weight: bolder;
 }
 
 .search_button:hover {
   filter: hue-rotate(180deg);
-}
-
-.nom_icon:hover {
-  filter: drop-shadow(0px 0px 1px rgb(14, 110, 84)) opacity(0.8);
-}
-
-.remove_icon:hover {
-  filter: drop-shadow(0px 0px 1px rgb(143, 18, 24)) opacity(0.8);
 }
 
 .content_box {
