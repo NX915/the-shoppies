@@ -12,6 +12,7 @@
   <header>
     <nav>
       <a class="brand box" href="./">
+        <!-- stylized shoppies logo -->
         <div class="brand small">
           The
         </div>
@@ -29,6 +30,7 @@
 
   <main>
     <div id="search_box" class="search_box fullSearchBox">
+      <!-- search input box, will expand to full page if no search given and no nomination is chosen -->
       <button id="search_button" class="search search_button svg_button fullSearchBox" onclick="searchMovie()">
         <div class="svg_icon">
           <svg class="search_icon" viewBox="0 0 512 512"><path fill="rgb(14, 110, 84)" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg>
@@ -38,14 +40,20 @@
       <input id="searchbar" class="search minSearchBar fullSearchBox" onkeyup="searchMovie(event); searchBarResize()" type="text" name="search" placeholder="Search movies.">
     </div>
     <div id="content_box" class ="content_box hide">
+      <!-- contains search result and nominations, hidden when no search input is given -->
       <div id="result_box" class="hide">
         <h2 id="search_info"></h2>
+        <!-- search count and error message -->
         <ul id="result" class="movie_grid"></ul>
+        <!-- movie search result, populated with js-->
         <div id="pages"></div>
+        <!-- page navigation buttons if applicable-->
       </div>
       <div id="nom_box" class="movie_grid hide">
         <h2 id="nom_info">Your Nominations</h2>
+        <!-- nomination box title, will change to full width message once all nomination is chosen -->
         <ul id="nomination"></ul>
+        <!-- user nominations as unordered list, populated with js-->
       </div>
     </div>
   </main>

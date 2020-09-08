@@ -29,6 +29,7 @@ const changeAllChildren = function(element, cb) {
   }
 };
 
+//detect api result's size and display page navigation buttons
 const displayPage = function(page, pageMax) {
   let txt = '';
   const pages = document.getElementById('pages');
@@ -192,6 +193,7 @@ const removeMovie = function(imdbID) {
 
   movieNom.parentNode.removeChild(movieNom);
 
+  //show search result again if user had reached limit but then removed items
   if (nomination.children.length < nominationCount) {
     document.getElementById('nom_box').classList.remove('finish');
     document.getElementById('nom_info').innerHTML = 'Your Nominations';
@@ -205,7 +207,7 @@ const removeMovie = function(imdbID) {
     document.getElementById('result_box').style.flex = '';
     document.getElementById('nom_box').style.flex = '';
   }
-
+  //hide nomination box if no more nomination exist
   if (nomination.children.length === 0) {
     changeAllChildren(document.getElementById('nom_box'), (element) => {
       element.classList.add('hide');
@@ -221,6 +223,7 @@ const checkCoolDownFinished = function(time = 1000) {
   return true;
 };
 
+//change search bar size depending on what is in the search bar
 const searchBarResize = function() {
   const coolDown = 550;
   let input = document.getElementById('searchbar');
@@ -255,11 +258,13 @@ const searchBarResize = function() {
   }
 };
 
+//quickly change focus so keyboard on mobile device would hide away
 const changeFocus = function() {
   document.getElementById('search_button').focus();
   document.activeElement.blur();
 };
 
+//monitor user input into search bar and perform search if user slowed down or stopped typing
 const searchMovie = function(event) {
   let input = document.getElementById('searchbar');
   const coolDown = 500;
