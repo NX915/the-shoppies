@@ -47,6 +47,9 @@ const displayPage = function(page, pageMax) {
       `;
     }
     if (page < pageMax) {
+      if (txt.length > 0) {
+        txt += `<p>${page}/${pageMax}</p>`;
+      }
       txt += `
         <button class="svg_button page_button" onclick="changePage('next')">
           <div class="svg_icon">
@@ -96,7 +99,7 @@ const displayMovie = function(data) {
       result.innerHTML += `
       <li id="${item.imdbID}" class="result_item movie_item">
         <div class="result_item movie_poster">
-          <img class="movie_poster" src="${poster}" onerror=${posterPlaceholderURL} alt="Poster for ${item.Title}">
+          <img name="${item.imdbID}_poster" class="movie_poster" src="${poster}" onerror="this.onerror=null;this.src='${posterPlaceholderURL}'" alt="Poster for ${item.Title}">
         </div>
         <div class="result_item movie_info">
           <h3 class="result_item movie_title">${item.Title}</h3>
@@ -142,7 +145,7 @@ const nominateMovie = function(imdbID) {
     nomination.innerHTML += `
       <li id="${imdbID}_nom" class="nom_item movie_item">
         <div class="nom_item movie_poster">
-          <img class="movie_poster" src=${poster} onerror=${posterPlaceholderURL} alt="Poster for ${Title}">
+          <img name="${imdbID}_poster" class="movie_poster" src=${poster} onerror="this.onerror=null;this.src='${posterPlaceholderURL}'" alt="Poster for ${Title}">
         </div>
         <div class="nom_item movie_info">
           <h3 class="nom_item movie_title">${Title} (${Year})</h3>
