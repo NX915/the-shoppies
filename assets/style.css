@@ -161,7 +161,7 @@ ul {
   border-style: none;
   background-color: transparent;
   text-decoration: none;
-  font-weight: 1000;
+  font-weight: normal;
   width: 6.5em;
 }
 
@@ -188,7 +188,7 @@ ul {
 
 .svg_button:hover {
   filter: hue-rotate(60deg) brightness(1.1);
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 .search_button:hover {
